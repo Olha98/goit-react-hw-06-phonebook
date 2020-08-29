@@ -1,23 +1,30 @@
 import React from 'react';
 import style from './FillterForm.module.css'
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import Actions from '../../../Redux/Actions/Actions'
 
-const FillterForm=({filter, onChange})=>{
+
+const FillterForm=({value, onfilterChange})=>{
 return(
   <>
     <h2>Contacts</h2>
       <label>
       <p className={style.contactsTitle}>Find contacts by name</p>
-          <input type="text" name="filter"  value={filter} onChange={onChange}/>
+          <input type="text" name="filter"  value={value} onChange={(e) => {
+            onfilterChange(e.target.value)
+            console.log(e.target.value)
+            }}/>
       </label>
 </>
-)
+)}
 
-}
+const mapStateToProps = state =>({
+    value: state.filter
+  })
 
-export default FillterForm
-
-FillterForm.propTypes = {
-  onChange:PropTypes.func.isRequired,
-  filter: PropTypes.string.isRequired,
+const mapDispatchToProps = {
+  onfilterChange: Actions.filterChange,
 };
+
+export default connect(mapStateToProps, mapDispatchToProps)(FillterForm)
+

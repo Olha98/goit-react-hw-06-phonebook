@@ -16,7 +16,7 @@ const ListItemPeople = ({ name, number, id, onRemoveContact }) => {
   )
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     onRemoveContact: (e) => {
       dispatch(Actions.removeContact(e.target.name))},

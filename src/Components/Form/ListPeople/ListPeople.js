@@ -26,7 +26,7 @@ console.log(contacts, "contacts")
 }
 
 const mapStateToProps = ({state}) => ({
- contacts: state.contacts
+ contacts: state.contacts.filter(contact => contact.name.toLowerCase().includes(state.filter.toLowerCase()))
 })
 
 

@@ -9,17 +9,24 @@ const contacts = (state = [], { type, payload }) => {
       return [...state, payload.contact];
     case constans.REMOVE:
       return state.filter(contact => contact.id !== payload.contactID)
-
-
-
-
     default:
       return state;
   }
 };
+
+const filter = (state = '', { type, payload }) => {
+
+  switch (type) {
+    case constans.FILTER:
+      return payload.filter;
+    default:
+      return state;
+  }
+};
+
 const alert = (state = false, action) => state;
 
-const filter = (state = '', action) => state;
+
 
 
 
