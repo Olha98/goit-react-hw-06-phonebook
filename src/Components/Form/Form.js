@@ -8,11 +8,13 @@ import ContactForm from './ContactForm/ContactForm';
 import { CSSTransition } from 'react-transition-group'
 import AlertModal from '../Alert/Alert'
 import Form from 'react-bootstrap/Form'
+import { connect } from 'react-redux';
+import Actions from '../../Redux/Actions/Actions'
 
 
 
 
-export default class App extends Component {
+class App extends Component {
   state = {
     contacts: [],
     name: '',
@@ -53,9 +55,9 @@ export default class App extends Component {
     e.preventDefault();
     const { name, number } = this.state;
 
-    this.addContact({ id: uuidv4(), name, number })
+    this.props.onAddContacts({  id: uuidv4(), name, number })
     this.setState({ name: '', number: '', filter: '' })
-    console.log('this.state', this.state)
+
   }
 
   addContact = (newContact) => {
@@ -110,14 +112,28 @@ export default class App extends Component {
           <CSSTransition in={true} appear={true} classNames="title" timeout={1000} unmountOnExit>
             <h2>Phonebook</h2>
           </CSSTransition>
+
+          
           <ContactForm handleChange={this.handleChange} name={name} number={number} />
           <FillterForm filter={filter} onChange={this.handleChange} />
-          <ListPeople contacts={this.getInfo()} deliteContact={this.deliteContac} />
+          {/* <ListPeople contacts={this.getInfo()} deliteContact={this.deliteContac} /> */}
+
+          <ListPeople/>
         </Form>
       </>
 
     );
   }
 }
+// const mapStateToProps =()=>{
+
+// }
+
+const mapDispatchToProps = dispatch => ({
+  onAddContacts: (name, number) => dispatch(Actions.addContact(name, number)),
+});
+
+export default connect(null, mapDispatchToProps)(App)
+
 
 

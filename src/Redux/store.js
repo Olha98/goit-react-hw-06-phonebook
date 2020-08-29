@@ -2,7 +2,7 @@ import contactReducer from '../Redux/Reducers/Reducers'
 import { createStore, combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
-  contactReducer
+  state: contactReducer
 });
 
 const store = createStore(rootReducer,

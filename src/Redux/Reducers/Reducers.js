@@ -1,10 +1,26 @@
 import { combineReducers } from 'redux';
-
-const contacts =(state =[], action)=>state;
-const alert =(state = false, action)=> state;
-
-const filter =(state ='', action)=> state;
+import constans from '../constans'
 
 
+const contacts = (state = [], { type, payload }) => {
 
-export default combineReducers({contacts, filter, alert})
+  switch (type) {
+    case constans.ADD:
+      return [...state, payload.contact];
+    case constans.REMOVE:
+      return state.filter(contact => contact.id !== payload.contactID)
+
+
+
+
+    default:
+      return state;
+  }
+};
+const alert = (state = false, action) => state;
+
+const filter = (state = '', action) => state;
+
+
+
+export default combineReducers({ contacts, filter, alert })

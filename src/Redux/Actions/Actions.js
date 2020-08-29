@@ -1,19 +1,16 @@
-import { v4 as uuidv4 } from 'uuid';
-import {ADD, REMOVE, FILTER, ALERT} from '../constans'
 
-const addContact = (name, number) => ({
-  type: ADD,
+import constans from '../constans'
+
+
+const addContact = (contact) => ({
+  type: constans.ADD,
   payload:{
-    contact:{
-      id: uuidv4(),
-      name,
-      number
-    },
+    contact
   },
 })
 
 const removeContact = contactID => ({
-  type: REMOVE,
+  type: constans.REMOVE,
   payload: {
     contactID
   }
@@ -21,14 +18,14 @@ const removeContact = contactID => ({
 
 
 const filterChange = filter => ({
-  type: FILTER,
+  type: constans.FILTER,
   payload: {
     filter
   }
 })
 
 const AllertError =()=>({
-  type: ALERT,
+  type: constans.ALERT,
   payload: {
     alert: false
   }

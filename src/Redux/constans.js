@@ -1,6 +1,7 @@
-const ADD = 'contacts/ADD'
-const REMOVE ='contact/REMOVE'
-const FILTER ='contacts/filterChange'
-const ALERT ='contacts/filterChange'
 
-export default {ADD, REMOVE, FILTER, ALERT}
+export default {
+  ADD :'contacts/ADD',
+  REMOVE :'contact/REMOVE',
+  FILTER :'contacts/filterChange',
+  ALERT :'contacts/filterChange'
+}
