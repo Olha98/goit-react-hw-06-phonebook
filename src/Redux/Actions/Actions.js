@@ -1,34 +1,9 @@
+import { createAction } from '@reduxjs/toolkit';
 
-import constans from '../constans'
-
-
-const addContact = (contact) => ({
-  type: constans.ADD,
-  payload:{
-    contact
-  },
-})
-
-const removeContact = contactID => ({
-  type: constans.REMOVE,
-  payload: {
-    contactID
-  }
-})
+const addContact = createAction('contacts/ADD', contact=>({ payload:{contact}}))
+const removeContact = createAction('contact/REMOVE', contactID=>({ payload: {contactID}}))
+const filterChange = createAction('contacts/filterChange', filter=>({ payload:{filter}}))
+const alertError = createAction('contacts/alertError')
 
 
-const filterChange = filter => ({
-  type: constans.FILTER,
-  payload: {
-    filter
-  }
-})
-
-const AllertError =()=>({
-  type: constans.ALERT,
-  payload: {
-    alert: false
-  }
-})
-
-export default {addContact, removeContact, filterChange, AllertError}
+export default {addContact, removeContact, filterChange, alertError}

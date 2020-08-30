@@ -1,33 +1,30 @@
 import { combineReducers } from 'redux';
-import constans from '../constans'
+import { createReducer } from '@reduxjs/toolkit';
+import Actions from '../Actions/Actions'
+
+const onAddTask = (state, action)=>[...state, action.payload.contact];
+const onRemoveContact = (state, action)=> state.filter(contact => contact.id !== action.payload.contactID)
 
 
-const contacts = (state = [], { type, payload }) => {
 
+
+const contacts = createReducer([], {
+  [Actions.addContact]: onAddTask,
+  [Actions.removeContact]:onRemoveContact,
+})
+
+const filter = createReducer('', {
+  [Actions.filterChange]:(state, action)=> action.payload.filter,
+})
+
+
+const alert = (state = false, { type, payload }) => {
   switch (type) {
-    case constans.ADD:
-      return [...state, payload.contact];
-    case constans.REMOVE:
-      return state.filter(contact => contact.id !== payload.contactID)
+    case  Actions.alertError.type:
+      return state;
     default:
       return state;
   }
 };
-
-const filter = (state = '', { type, payload }) => {
-
-  switch (type) {
-    case constans.FILTER:
-      return payload.filter;
-    default:
-      return state;
-  }
-};
-
-const alert = (state = false, action) => state;
-
-
-
-
 
 export default combineReducers({ contacts, filter, alert })

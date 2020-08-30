@@ -18,13 +18,12 @@ return(
 </>
 )}
 
-const mapStateToProps = state =>({
-    value: state.filter
-  })
+
 
 const mapDispatchToProps = {
   onfilterChange: Actions.filterChange,
+
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FillterForm)
+export default connect(null, mapDispatchToProps)(FillterForm)
 

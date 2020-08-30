@@ -5,8 +5,6 @@ import Actions from '../../../../Redux/Actions/Actions';
 
 
 const ListItemPeople = ({ name, number, id, onRemoveContact }) => {
-
-  console.log(onRemoveContact,"deliteContact")
   return (
     <>
       <li className={style.listItem}>{name}: {number}

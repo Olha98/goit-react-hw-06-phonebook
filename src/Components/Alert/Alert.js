@@ -3,7 +3,7 @@ import Alert from 'react-bootstrap/Alert'
 import css from './Alert.module.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
-;
+
 
 
 

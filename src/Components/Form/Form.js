@@ -16,30 +16,10 @@ import Actions from '../../Redux/Actions/Actions'
 
 class App extends Component {
   state = {
-    // contacts: [],
     name: '',
     number: '',
-    // filter: '',
-    // inShow: false,
     AlertShow:false,
-
   }
-
-  // componentDidMount() {
-
-  //   const localdata = localStorage.getItem("contacts")
-  //   if (localdata) {
-  //     this.setState({ contacts: JSON.parse(localdata), inShow: true })
-  //   }
-  // }
-
-  // componentDidUpdate(prevState, prevProps) {
-  //   if (prevState.contacts !== this.state.contacts) {
-  //     localStorage.setItem("contacts", JSON.stringify(this.state.contacts))
-
-  //   }
-
-  // }
 
   handleChange = (e) => {
     const name = e.target.name;
@@ -47,50 +27,15 @@ class App extends Component {
     this.setState({ [name]: value })
   }
 
-  // getFilterValue = (e) => {
-  //   this.setState({ filter: e.target.value })
-  // }
-
   handleSubmit = (e) => {
     e.preventDefault();
     const { name, number } = this.state;
-
     this.props.onAddContacts({  id: uuidv4(), name, number })
     this.setState({ name: '', number: '', filter: '' })
-
   }
-
-  // addContact = (newContact) => {
-  //   const { contacts } = this.state;
-  //   if (contacts.find((item) => item.name === newContact.name)) {
-  //     this.setState({ AlertShow: true });
-  //     setTimeout(() => this.setState({ AlertShow: false }), 5000);
-  //     return;
-  //   } else {
-  //     this.setState((prevState) => {
-  //       return {
-  //         contacts: [...prevState.contacts, newContact],
-  //       };
-  //     });
-  //   }
-  // }
-
-
-
-  // getInfo = () => {
-  //   const { contacts, filter } = this.state;
-  //   if (filter) {
-  //     const filterArr = contacts.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase()))
-  //     return filterArr
-  //   } else {
-  //     return contacts
-  //   }
-  // }
-
 
   render() {
     const { name, number, AlertShow } = this.state;
-
     return (
       <>
         {AlertShow && <CSSTransition
@@ -106,8 +51,6 @@ class App extends Component {
           <CSSTransition in={true} appear={true} classNames="title" timeout={1000} unmountOnExit>
             <h2>Phonebook</h2>
           </CSSTransition>
-
-          
           <ContactForm handleChange={this.handleChange} name={name} number={number} />
           <FillterForm/>
           <ListPeople/>
@@ -118,12 +61,17 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = state =>({
+  value: state.filter,
+  alert: state.alert
+})
+
 
 const mapDispatchToProps = dispatch => ({
   onAddContacts: (name, number) => dispatch(Actions.addContact(name, number)),
 });
 
-export default connect(null, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)
 
 
 
