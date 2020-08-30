@@ -5,9 +5,6 @@ import Actions from '../Actions/Actions'
 const onAddTask = (state, action)=>[...state, action.payload.contact];
 const onRemoveContact = (state, action)=> state.filter(contact => contact.id !== action.payload.contactID)
 
-
-
-
 const contacts = createReducer([], {
   [Actions.addContact]: onAddTask,
   [Actions.removeContact]:onRemoveContact,
@@ -19,9 +16,10 @@ const filter = createReducer('', {
 
 
 const alert = (state = false, { type, payload }) => {
+
   switch (type) {
     case  Actions.alertError.type:
-      return state;
+    return (state = !state);
     default:
       return state;
   }

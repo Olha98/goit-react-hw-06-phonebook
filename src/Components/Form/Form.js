@@ -11,34 +11,43 @@ import Form from 'react-bootstrap/Form'
 import { connect } from 'react-redux';
 import Actions from '../../Redux/Actions/Actions'
 
-
-
-
 class App extends Component {
   state = {
     name: '',
     number: '',
-    AlertShow:false,
   }
 
   handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     this.setState({ [name]: value })
+
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
     const { name, number } = this.state;
-    this.props.onAddContacts({  id: uuidv4(), name, number })
+    console.log(this.props.contacts, "contacts")
+    const errorContacts = this.props.contacts
+    if(errorContacts && errorContacts.length > 1){
+      console.log(errorContacts.lengt,"errorContacts.lengt")
+      errorContacts.map(contact=> console.log(contact,"contact.name"))
+    }
+
+    this.props.onAddContacts({ id: uuidv4(), name, number });
     this.setState({ name: '', number: '', filter: '' })
   }
 
+  alertShow = () => {
+    this.props.onAlertError()
+  }
+
   render() {
-    const { name, number, AlertShow } = this.state;
+    const { name, number } = this.state;
+
     return (
       <>
-        {AlertShow && <CSSTransition
+        {alert && <CSSTransition
           classNames={style}
           in={true}
           appear={true}
@@ -52,26 +61,49 @@ class App extends Component {
             <h2>Phonebook</h2>
           </CSSTransition>
           <ContactForm handleChange={this.handleChange} name={name} number={number} />
-          <FillterForm/>
-          <ListPeople/>
+          <FillterForm />
+          <ListPeople />
         </Form>
       </>
-
     );
   }
 }
 
-const mapStateToProps = state =>({
-  value: state.filter,
-  alert: state.alert
-})
+const mapStateToProps = state => {
 
 
-const mapDispatchToProps = dispatch => ({
-  onAddContacts: (name, number) => dispatch(Actions.addContact(name, number)),
-});
+  console.log(state, "state")
+  return {
+    value: state.filter,
+    alert: state.alert,
+    contacts: state.contacts,
+  }
+
+}
+
+
+const mapDispatchToProps = dispatch => {
+
+
+  return {
+    onAddContacts: (name, number) => dispatch(Actions.addContact(name, number)),
+    onAlertError: () => dispatch(Actions.alertError())
+  }
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
 
 
 
+// const { contacts } = this.state;
+//     if (contacts.find((item) => item.name === newContact.name)) {
+//       this.setState({ AlertShow: true });
+//       setTimeout(() => this.setState({ AlertShow: false }), 5000);
+//       return;
+//     } else {
+//       this.setState((prevState) => {
+//         return {
+//           contacts: [...prevState.contacts, newContact],
+//         };
+//       });
+//     }
