@@ -14,9 +14,10 @@ const filter = createReducer('', {
   [Actions.filterChange]:(state, action)=> action.payload.filter,
 })
 
-
 const alert = (state = false, { type, payload }) => {
-
+console.log(state, "state")
+console.log(!state, "!state")
+console.log(Actions.alertError.type,"type")
   switch (type) {
     case  Actions.alertError.type:
     return (state = !state);

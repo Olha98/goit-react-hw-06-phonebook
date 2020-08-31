@@ -5,5 +5,4 @@ const removeContact = createAction('contact/REMOVE', contactID=>({ payload: {con
 const filterChange = createAction('contacts/filterChange', filter=>({ payload:{filter}}))
 const alertError = createAction('contacts/alertError')
 
-
 export default {addContact, removeContact, filterChange, alertError}

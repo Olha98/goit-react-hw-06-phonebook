@@ -3,7 +3,6 @@ import style from './FillterForm.module.css'
 import { connect } from 'react-redux';
 import Actions from '../../../Redux/Actions/Actions'
 
-
 const FillterForm=({value, onfilterChange})=>{
 return(
   <>
@@ -12,17 +11,13 @@ return(
       <p className={style.contactsTitle}>Find contacts by name</p>
           <input type="text" name="filter"  value={value} onChange={(e) => {
             onfilterChange(e.target.value)
-            console.log(e.target.value)
             }}/>
       </label>
 </>
 )}
 
-
-
 const mapDispatchToProps = {
   onfilterChange: Actions.filterChange,
-
 };
 
 export default connect(null, mapDispatchToProps)(FillterForm)

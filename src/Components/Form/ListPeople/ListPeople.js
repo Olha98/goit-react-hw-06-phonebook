@@ -5,8 +5,6 @@ import style from './ListPeople.module.css'
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { connect } from 'react-redux';
 
-
-
 const ListPeople = ({ contacts}) => {
 console.log(contacts, "contacts")
   return (
@@ -28,8 +26,6 @@ console.log(contacts, "contacts")
 const mapStateToProps = ({state}) => ({
  contacts: state.contacts.filter(contact => contact.name.toLowerCase().includes(state.filter.toLowerCase()))
 })
-
-
 
 export default connect(mapStateToProps)(ListPeople)
 

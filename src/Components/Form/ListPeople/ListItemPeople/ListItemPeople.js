@@ -3,7 +3,6 @@ import style from './ListItemPeople.module.css'
 import { connect } from 'react-redux';
 import Actions from '../../../../Redux/Actions/Actions';
 
-
 const ListItemPeople = ({ name, number, id, onRemoveContact }) => {
   return (
     <>
